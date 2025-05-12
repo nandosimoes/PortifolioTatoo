@@ -1,0 +1,18 @@
+.app-container {
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Garante que o conteúdo não fique sob o header */
+main {
+  padding-top: 80px; /* Ajuste conforme a altura do seu header */
+}
