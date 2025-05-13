@@ -14,8 +14,8 @@ function App() {
       <Carrossel />
       <Header />
         <Hero />
-        <Sobre />
         <Portfolio />
+        <Sobre />
         <Certificacoes />
         <Contato />
     </div>
