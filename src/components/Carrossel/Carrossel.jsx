@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Carrossel.module.css';
 
-// URLs das imagens (substitua pelos seus links reais)
 const imagens = [
 'https://iili.io/38qQcOP.jpg',
 'https://iili.io/38qQa5B.jpg',

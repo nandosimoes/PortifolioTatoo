@@ -9,7 +9,6 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 40px 20px;
   box-sizing: border-box;
 }
 
@@ -28,9 +27,12 @@
   position: relative;
   z-index: 2;
   width: 90%;
-  min-height: 80vh;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 40px;
+  padding: 5%;
   border-radius: 8px;
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -39,49 +41,28 @@
 
 .title {
   font-size: 2.5rem;
-  margin-bottom: 40px;
+  margin-bottom: 3%;
   text-align: center;
   text-transform: uppercase;
   font-weight: 300;
-  letter-spacing: 2px;
-}
-
-.contentWrapper {
-  display: flex;
-  gap: 40px;
-  height: 100%;
-}
-
-.imageContainer {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.profileImage {
-  width: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .textContent {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 1.2rem;
+  overflow-y: auto;
   line-height: 1.8;
-  text-align: left;
-}
+  font-size: 1.2rem;
+  text-align: justify;
+  padding: 2% 0;
+  text-align: center;
 
-.textContent p {
-  margin: 0;
 }
 
 .buttonContainer {
-  margin-top: 30px;
+  margin-top: 3%;
   text-align: center;
 }
 
@@ -105,70 +86,35 @@
   transform: translateY(-3px);
 }
 
-@media (max-width: 1024px) {
-  .contentWrapper {
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  .profileImage {
-    max-width: 300px;
-    height: 300px;
-    margin: 0 auto;
-  }
-  
-  .textContent {
-    text-align: center;
-  }
-}
-
 @media (max-width: 768px) {
   .contentBox {
     width: 95%;
-    padding: 30px;
+    height: 95%;
+    padding: 4%;
   }
 
   .title {
     font-size: 2rem;
-    margin-bottom: 30px;
   }
 
   .textContent {
     font-size: 1rem;
   }
 
-  .profileImage {
-    max-width: 250px;
-    height: 250px;
+  .button {
+    padding: 10px 30px;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .sobreContainer {
-    padding: 20px 15px;
-  }
-  
-  .contentBox {
-    padding: 20px;
-    min-height: 90vh;
-  }
-  
   .title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    white-space: normal;
   }
   
   .textContent {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.6;
-  }
-  
-  .profileImage {
-    max-width: 200px;
-    height: 200px;
-  }
-  
-  .button {
-    padding: 10px 30px;
-    font-size: 1rem;
   }
 }

@@ -12,7 +12,3 @@
   box-sizing: border-box;
 }
 
-/* Garante que o conteúdo não fique sob o header */
-main {
-  padding-top: 80px; /* Ajuste conforme a altura do seu header */
-}

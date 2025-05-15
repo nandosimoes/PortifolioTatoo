@@ -1,8 +1,11 @@
-.portfolio {
-  padding: 80px 20px;
+.certificacoes {
+  padding: 40px 20px;
   background-color: #000;
   color: #fff;
-  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sectionTitle {
@@ -11,11 +14,13 @@
   margin-bottom: 40px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  width: 100%;
 }
 
 .addButtonContainer {
   text-align: center;
   margin-bottom: 40px;
+  width: 100%;
 }
 
 .showFormButton {
@@ -35,15 +40,14 @@
   transform: translateY(-2px);
 }
 
-.carouselContainer {
+.carrosselContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
+  height: 80vh;
   position: relative;
+  margin: 0 auto;
 }
 
 .navButton {
@@ -56,139 +60,61 @@
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.navButton:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
-}
-
-.navButton:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 50px;
-  width: 100%;
-}
-
-.gridItem {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 1/1;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  background-color: white;
-  border-radius: 4px;
-}
-
-.emptyItem {
-  background-color: transparent;
-  pointer-events: none;
-}
-
-.gridItem:hover {
-  transform: scale(1.03);
-}
-
-.imageContainer {
-  width: 100%;
-  height: 100%;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
-
-.overlay {
+  z-index: 2;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  padding: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.gridItem:hover .overlay {
-  opacity: 1;
+.navButton:hover {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
-.itemTitle {
-  margin: 0;
-  font-size: 1rem;
-  color: #fff;
+.navButton:first-of-type {
+  left: 20px;
 }
 
-/* Modal styles */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.navButton:last-of-type {
+  right: 20px;
 }
 
-.modalContent {
-  background-color: #000;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 800px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
+.certificadoWrapper {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid #333;
+  align-items: center;
+  justify-content: center;
 }
 
-.closeButton {
-  align-self: flex-end;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.modalImage {
-  width: 100%;
-  max-height: 60vh;
+.certificadoImage {
+  max-width: 90%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  margin-bottom: 20px;
   background-color: white;
   padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-.modalInfo {
-  color: #fff;
-  padding: 0 10px;
+.certificadoInfo {
+  margin-top: 30px;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 20px;
 }
 
-.modalInfo h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.certificadoInfo h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
 }
 
-.modalInfo p {
+.certificadoInfo p {
   margin-bottom: 20px;
   line-height: 1.6;
+  font-size: 1.1rem;
 }
 
 .deleteButton {
@@ -199,72 +125,83 @@
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  margin-top: 15px;
+  transition: all 0.3s ease;
 }
 
 .deleteButton:hover {
   background-color: #ff0000;
 }
 
-/* Admin Panel */
+/* Admin Panel Styles */
 .adminPanel {
   max-width: 800px;
+  width: 90%;
   margin: 0 auto 40px;
-  padding: 20px;
+  padding: 30px;
   background-color: #111;
   border-radius: 8px;
+  border: 1px solid #333;
 }
 
 .adminPanel h3 {
   margin-top: 0;
   margin-bottom: 20px;
   text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
 }
 
 .formGroup label {
   font-weight: bold;
+  color: #fff;
+  font-size: 1rem;
 }
 
 .formGroup input,
 .formGroup textarea {
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
-  border: 1px solid #333;
+  border: 1px solid #444;
   background-color: #222;
   color: #fff;
+  font-size: 1rem;
 }
 
 .formGroup textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
 
 .formButtons {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .submitButton {
   background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1rem;
   flex: 1;
+  transition: all 0.3s ease;
 }
 
 .submitButton:hover {
@@ -275,37 +212,52 @@
   background-color: #666;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1rem;
   flex: 1;
+  transition: all 0.3s ease;
 }
 
 .cancelButton:hover {
   background-color: #555;
 }
 
-/* Responsividade */
+/* Responsive Adjustments */
 @media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+  .certificadoImage {
+    max-height: 60vh;
+  }
+  
+  .certificadoInfo {
+    max-width: 90%;
   }
 }
 
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+  .sectionTitle {
+    font-size: 2rem;
   }
   
-  .modalContent {
-    flex-direction: column;
+  .carrosselContainer {
+    height: 70vh;
   }
   
-  .modalImage {
-    max-height: 40vh;
+  .certificadoImage {
+    max-height: 50vh;
+    padding: 15px;
   }
-
+  
+  .certificadoInfo h3 {
+    font-size: 1.5rem;
+  }
+  
+  .certificadoInfo p {
+    font-size: 1rem;
+  }
+  
   .navButton {
     width: 40px;
     height: 40px;
@@ -314,19 +266,37 @@
 }
 
 @media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .certificacoes {
+    padding: 30px 15px;
   }
   
   .sectionTitle {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
   }
-
+  
+  .carrosselContainer {
+    height: 60vh;
+  }
+  
+  .certificadoImage {
+    max-height: 45vh;
+    padding: 10px;
+  }
+  
+  .certificadoInfo {
+    margin-top: 20px;
+  }
+  
+  .certificadoInfo h3 {
+    font-size: 1.3rem;
+  }
+  
   .formButtons {
     flex-direction: column;
   }
-
-  .carouselContainer {
-    gap: 10px;
+  
+  .adminPanel {
+    padding: 20px;
   }
 }

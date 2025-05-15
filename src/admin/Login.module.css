@@ -1,0 +1,98 @@
+/* Login.module.css */
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  border-radius: 20px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.loginForm h2 {
+  font-size: 28px;
+  position: relative;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.loginForm {
+  text-align: center;
+
+}
+.loginForm h2::after {
+  animation: pulse 1s linear infinite;
+}
+
+.error {
+  color: #ff3333;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.formGroup {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.formGroup input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 15px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.formGroup input:focus {
+  border-color: #31a140;
+}
+
+.loginButton {
+  border: none;
+  outline: none;
+  padding: 15px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  background-color: #31a140;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.loginButton:hover {
+  background-color: #31a14096;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}

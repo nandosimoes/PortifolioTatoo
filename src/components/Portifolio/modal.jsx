@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Portifolio.module.css';
 
-
 export default function Modal({ item, onClose, onDelete }) {
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
@@ -11,15 +10,17 @@ export default function Modal({ item, onClose, onDelete }) {
         <div className={styles.modalInfo}>
           <h3>{item.title}</h3>
           <p>{item.description}</p>
-          <button 
-            className={styles.deleteButton}
-            onClick={() => {
-              onDelete(item.id);
-              onClose();
-            }}
-          >
-            Deletar
-          </button>
+          {onDelete && (
+            <button 
+              className={styles.deleteButton}
+              onClick={() => {
+                onDelete(item.id);
+                onClose();
+              }}
+            >
+              Deletar
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './Portifolio.module.css';
 import Modal from './modal';
 
-export default function Portfolio() {
+export default function Portfolio({ isAdmin = false }) {
   const [portfolioItems, setPortfolioItems] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +12,10 @@ export default function Portfolio() {
     title: '',
     description: ''
   });
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerRow = 4;
+  const rowsPerPage = 2;
+  const itemsPerPage = itemsPerRow * rowsPerPage;
 
   useEffect(() => {
     fetchPortfolioItems();
@@ -50,8 +54,12 @@ export default function Portfolio() {
     formData.append('description', newItem.description);
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:8080/api/portfolio', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: formData
       });
 
@@ -61,6 +69,7 @@ export default function Portfolio() {
         setNewItem({ image: null, title: '', description: '' });
         setShowForm(false);
         document.getElementById('image-upload').value = '';
+        setCurrentPage(0); // Reset to first page after adding new item
       }
     } catch (error) {
       console.error('Error adding portfolio item:', error);
@@ -69,8 +78,12 @@ export default function Portfolio() {
 
   const handleDelete = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:8080/api/portfolio/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
 
       if (response.ok) {
@@ -78,17 +91,43 @@ export default function Portfolio() {
         if (selectedImage && selectedImage.id === id) {
           setIsModalOpen(false);
         }
+        // Adjust page if we deleted the last item on the current page
+        if (portfolioItems.length % itemsPerPage === 1 && currentPage > 0) {
+          setCurrentPage(currentPage - 1);
+        }
       }
     } catch (error) {
       console.error('Error deleting portfolio item:', error);
     }
   };
 
+  const handlePrev = () => {
+    setCurrentPage(prev => Math.max(0, prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentPage(prev => 
+      (prev + 1) * itemsPerPage < portfolioItems.length ? prev + 1 : prev
+    );
+  };
+
+  const visibleItems = portfolioItems.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
+  // Fill empty spaces to maintain grid layout
+  const emptyItems = itemsPerPage - visibleItems.length;
+  const displayItems = [...visibleItems];
+  for (let i = 0; i < emptyItems; i++) {
+    displayItems.push({ id: `empty-${i}`, empty: true });
+  }
+
   return (
     <section id="portfolio" className={styles.portfolio}>
       <h2 className={styles.sectionTitle}>Minha Arte</h2>
       
-      {!showForm ? (
+      {isAdmin && !showForm ? (
         <div className={styles.addButtonContainer}>
           <button 
             className={styles.showFormButton}
@@ -97,7 +136,7 @@ export default function Portfolio() {
             Adicionar Nova Tatuagem
           </button>
         </div>
-      ) : (
+      ) : isAdmin && showForm ? (
         <div className={styles.adminPanel}>
           <h3>Adicionar Nova Tatuagem</h3>
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -143,26 +182,48 @@ export default function Portfolio() {
             </div>
           </form>
         </div>
-      )}
+      ) : null}
 
-      <div className={styles.grid}>
-        {portfolioItems.map((item) => (
-          <div key={item.id} className={styles.gridItem} onClick={() => handleImageClick(item)}>
-            <div className={styles.imageContainer}>
-              <img src={item.image_url} alt={item.title} className={styles.image} />
-            </div>
-            <div className={styles.overlay}>
-              <h3 className={styles.itemTitle}>{item.title}</h3>
-            </div>
-          </div>
-        ))}
+      <div className={styles.carouselContainer}>
+        <button 
+          className={styles.navButton} 
+          onClick={handlePrev}
+          disabled={currentPage === 0}
+        >
+          &lt;
+        </button>
+        
+        <div className={styles.grid}>
+          {displayItems.map((item) => (
+            item.empty ? (
+              <div key={item.id} className={`${styles.gridItem} ${styles.emptyItem}`}></div>
+            ) : (
+              <div key={item.id} className={styles.gridItem} onClick={() => handleImageClick(item)}>
+                <div className={styles.imageContainer}>
+                  <img src={item.image_url} alt={item.title} className={styles.image} />
+                </div>
+                <div className={styles.overlay}>
+                  <h3 className={styles.itemTitle}>{item.title}</h3>
+                </div>
+              </div>
+            )
+          ))}
+        </div>
+        
+        <button 
+          className={styles.navButton} 
+          onClick={handleNext}
+          disabled={(currentPage + 1) * itemsPerPage >= portfolioItems.length}
+        >
+          &gt;
+        </button>
       </div>
 
       {isModalOpen && selectedImage && (
         <Modal
           item={selectedImage}
           onClose={() => setIsModalOpen(false)}
-          onDelete={handleDelete}
+          onDelete={isAdmin ? handleDelete : null}
         />
       )}
     </section>
